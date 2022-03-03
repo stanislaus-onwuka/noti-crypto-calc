@@ -1,0 +1,39 @@
+.rate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 20px 0px;
+    width: 100%;
+    max-width: 330px;
+    margin: 1rem 1.2rem;
+
+    .rate-title{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 40px;
+        line-height: 62px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+    }
+
+    .exchange-rate{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 1rem 0;
+
+        .from-value,.to-value{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 26px;
+            line-height: 44px;
+            color: #d6d6d6;
+            text-transform: uppercase;
+        }
+
+        .arrow{
+            margin: 0 0.4rem;
+        }
+    }
+}
