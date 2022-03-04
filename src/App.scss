@@ -8,7 +8,7 @@
       padding: 1rem 1.5rem;
 
       .hero{
-        padding: 1rem 0;
+        padding: 2rem 0;
 
         .hero-text{
           max-width: 617px;
@@ -68,10 +68,13 @@
   }
 
   main{
-    margin: 2rem 2.5rem;
-    padding: 1rem;
+    // margin: 2rem 2.5rem;
+    padding: 2rem 3.5rem;
+
 
     .rates-container{
+      margin: 3rem 0;
+
       .rates_title{
         font-style: normal;
         font-weight: normal;
@@ -202,6 +205,16 @@
 
             span{
               margin: 0 0.3rem;
+              font-weight: bold;
+
+
+              // &::after{
+              //   content: "";
+              //   display: inline-block;
+              //   height: 2px;
+              //   background-color: #FFFFFF;
+              //   width: 100%;
+              // }
             }
 
           }

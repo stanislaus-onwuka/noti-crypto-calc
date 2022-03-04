@@ -1,14 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.scss';
 import Navigation from './components/Navigation/Navigation';
 import { ReactComponent as HeartIcon } from './assets/svg/heart.svg'
 import Rate from './components/Rate/Rate';
 
+interface CalcValues{
+  ethCalcValue: number;
+  btcCalcValue: number;
+  nairaCalcValue: number;
+}
+
+const defaultCalcValues = {
+  ethCalcValue: 0,
+  btcCalcValue: 0,
+  nairaCalcValue: 0
+};
 
 function App() {
   const [btcValue, setBtcValue] = useState(0);
   const [ethValue, setEthValue] = useState(0);
-  const [nairaValue, setNairaValue] = useState(0);
+  const [nairaValue, setNairaValue] = useState(580);
+  const [calcValues, setCalcValues] = useState<CalcValues>(defaultCalcValues);
+  const [convertedValues, setConvertedValues] = useState({convertedDollars: 0, convertedNaira: 0, convertedBtc: 0});
+  const [ethInputValue, setEthInputValue] = useState(0);
 
   const data = [
     {
@@ -44,10 +58,12 @@ function App() {
     },
   ]
 
+  // Connect to WebSockets
+  // BTC Websocket
   let btcWS = new WebSocket('wss://fstream.binance.com/stream?streams=btcusdt@aggTrade');
   btcWS.onmessage = (e) => {
     const value = JSON.parse(e.data);
-    console.log("BTC", value.data.p);
+    // console.log("BTC", value.data.p);
     
     try {
       if ((value.event = "data")) {
@@ -58,10 +74,11 @@ function App() {
     }
   }
 
+  // ETH Websocket
   let ethWS = new WebSocket('wss://fstream.binance.com/stream?streams=ethusdt@aggTrade');
   ethWS.onmessage = (e) => {
     const value = JSON.parse(e.data);
-    console.log("ETH", value.data.p);
+    // console.log("ETH", value.data.p);
 
     try {
       if ((value.event = "data")) {
@@ -72,14 +89,58 @@ function App() {
     }
   }
 
-  let ngnWS = new WebSocket('wss://stream.binance.com/stream?streams=usdtngn@aggTrade');
+  // Naira Websocket
+  let ngnWS = new WebSocket('wss://stream.binance.com:9443/stream?streams=usdtngn@aggTrade');
   ngnWS.onmessage = (e) => {
     const value = JSON.parse(e.data);
-    // setNairaValue(value.data.p);
-    console.log("NGN",value.data.p);
+    try {
+      if ((value.event = "data")) {
+        setNairaValue(value.data.p);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    // console.log("NGN",value.data.p);
+  }
+
+  // Perform conversion
+  useEffect(() => {
+    setCalcValues({
+      ethCalcValue: ethValue ? ethValue : 0,
+      btcCalcValue: btcValue ? btcValue : 0,
+      nairaCalcValue: nairaValue
+    })
+
+    setInterval(
+      () => setCalcValues({
+        ethCalcValue: ethValue,
+        btcCalcValue: btcValue,
+        nairaCalcValue: nairaValue
+      }), 150000)
+  }, [ethValue, btcValue, nairaValue])
+
+  // Submit function
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let dollarEquivalent = ethInputValue * calcValues.ethCalcValue;
+    let nairaEquivalent = dollarEquivalent * calcValues.nairaCalcValue;
+    let btcEquivalent = dollarEquivalent / calcValues.btcCalcValue;
+
+    setConvertedValues({
+      convertedDollars: dollarEquivalent,
+      convertedNaira: nairaEquivalent,
+      convertedBtc: btcEquivalent
+    })
+
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    setEthInputValue(Number(e.target.value))
   }
 
 
+  // <!-- #__APP > div > div > div.css-1jx6fr9 > div > div.css-i54jlg > div.left > div > div.nowPrice > div.showPrice -->
 
 
   return (
@@ -98,7 +159,7 @@ function App() {
             <a href="#conversion" className="hero-btn" >Perform Conversion</a>
           </div>
           <div className="hero-art">
-            <iframe src='https://my.spline.design/crypto-6554ab1fac313c113586d95f59c22e3f/' title='Crypto' frameBorder='0' width='100%' height='100%'></iframe>
+            <iframe src='https://my.spline.design/crypto-6554ab1fac313c113586d95f59c22e3f/' title="Crypto" frameBorder='0' width='100%' height='100%'></iframe>
           </div>
         </div>
       </header>
@@ -123,14 +184,16 @@ function App() {
             }
           </div>
         </section>
-        <section className="conversion-container" id="conversion">
+        {
+          ethValue > 0 &&
+          <section className="conversion-container" id="conversion">
           <div className="conversion-form-container">
             <h2 className="conversion_title">Convert ETH</h2>
             <p className="conversion_subtitle">Get the your equivalent ETH in Naira, BTC and Dollars.</p>
-            <form className=" conversion-form">
+            <form className=" conversion-form" onSubmit={handleSubmit}>
               <div className="eth-input-container">
                 <label htmlFor="eth-input">eth</label>
-                <input type="number" name="eth-input" className="eth-input"/>
+                <input type="number" name="eth-input" className="eth-input" onChange={handleChange} required min="0"/>
               </div>
               <input type="submit" value="Convert" className="convert-btn"/>
             </form>
@@ -139,17 +202,18 @@ function App() {
             <h2 className="conversion-results-container_title">Conversion Results</h2>
             <div className="conversion-results">
               <h3 className="conversion-result dollar-result">
-                $ <span></span> Dollars
+                $ <span>{ Math.ceil(convertedValues.convertedDollars).toLocaleString('en-US') }</span> Dollars
               </h3>
               <h3 className="conversion-result dollar-result">
-                ₦ <span></span> Naira
+                ₦ <span>{ Math.ceil(convertedValues.convertedNaira).toLocaleString('en-US') }</span> Naira
               </h3>
               <h3 className="conversion-result dollar-result">
-                <span></span> BTC
+                <span>{ Math.abs(convertedValues.convertedBtc).toPrecision(4) }</span> BTC
               </h3>
             </div>
           </div>
         </section>
+        }
       </main>
       <footer>
         <h4 className="made-by">
