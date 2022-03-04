@@ -136,7 +136,9 @@ function App() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
-    setEthInputValue(Number(e.target.value))
+    let actualVal = Number(e.target.value);
+    setEthInputValue(Math.abs(actualVal))
+
   }
 
 
@@ -193,7 +195,7 @@ function App() {
             <form className=" conversion-form" onSubmit={handleSubmit}>
               <div className="eth-input-container">
                 <label htmlFor="eth-input">eth</label>
-                <input type="number" name="eth-input" className="eth-input" onChange={handleChange} required min="0"/>
+                <input type="number" name="eth-input" className="eth-input" onChange={handleChange} required min="0" step=".0001"/>
               </div>
               <input type="submit" value="Convert" className="convert-btn"/>
             </form>
