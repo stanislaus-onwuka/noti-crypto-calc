@@ -1,4 +1,9 @@
 .homepage{
+  background-image: url('./assets/png/Vector.png');
+  background-position: left 300px;
+  background-size: 30%;
+  background-repeat: no-repeat;
+
   header{
     padding: 1rem 2rem;
     .hero-container{
@@ -69,11 +74,12 @@
 
   main{
     // margin: 2rem 2.5rem;
-    padding: 2rem 3.5rem;
+    
 
 
     .rates-container{
       margin: 3rem 0;
+      padding: 2rem 3.5rem;
 
       .rates_title{
         font-style: normal;
@@ -102,7 +108,13 @@
     }
 
     .conversion-container{
+      background-image: url('./assets/png/dollars-bg.png'), url('./assets/png/crypto-bg.png');
+      background-position: right bottom ,left 50% ;
+      background-repeat: no-repeat, no-repeat;
+      background-size: 8%, 15%;
       margin: 3rem 0;
+      padding: 2rem 3.5rem;
+
       .conversion-form-container{
         .conversion_title{
           font-style: normal;
@@ -180,6 +192,8 @@
       }
 
       .conversion-results-container{
+
+
         .conversion-results-container_title{
           font-style: normal;
           font-weight: normal;

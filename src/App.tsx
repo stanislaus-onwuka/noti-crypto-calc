@@ -141,7 +141,7 @@ function App() {
 
   }
 
-
+  // Puppeeter
   // <!-- #__APP > div > div > div.css-1jx6fr9 > div > div.css-i54jlg > div.left > div > div.nowPrice > div.showPrice -->
 
 
