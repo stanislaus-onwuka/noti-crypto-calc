@@ -306,7 +306,7 @@
               }
         
               @include media('>=phone', '<custom-view'){
-                font-size: 25px;
+                font-size: 22px;
 
               }
             }
@@ -320,11 +320,14 @@
 
               @include media('<phone'){
                 font-size: 18px;
+                padding: 0.4rem;
 
               }
         
               @include media('>=phone', '<custom-view'){
-                font-size: 22px;
+                font-size: 20px;
+                padding: 0.5rem;
+
 
               }
             }
