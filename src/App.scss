@@ -1,8 +1,20 @@
+@import './breakpoints.scss';
+
 .homepage{
   background-image: url('./assets/png/Vector.png');
   background-position: left 300px;
   background-size: 30%;
   background-repeat: no-repeat;
+
+  @include media('<phone'){
+    background-size: 60%;
+
+  }
+
+  @include media('>=phone', '<tablet'){
+    background-size: 60%;
+
+  }
 
   header{
     padding: 1rem 2rem;
@@ -25,6 +37,17 @@
             line-height: 47px;
             color: #FFFFFF;
             text-transform: uppercase;
+
+            @include media('<phone'){
+              font-size: 24px;
+              line-height: 38px;
+    
+            }
+    
+            @include media('>=phone', '<tablet'){
+              font-size: 28px;
+              line-height: 40px;
+            }
           }
 
           .hero_title{
@@ -34,6 +57,17 @@
             letter-spacing: 0.055em;
             color: #FFFFFF;
             margin: 0.5rem 0;
+
+            @include media('<phone'){
+              font-size: 40px;
+              line-height: 60px;
+    
+            }
+    
+            @include media('>=phone', '<tablet'){
+              font-size: 60px;
+              line-height: 84px;
+            }
           }
 
           .hero_subtitle{
@@ -42,6 +76,17 @@
             font-size: 20px;
             line-height: 30px;
             color: rgba(255, 255, 255, 0.74);
+
+            @include media('<phone'){
+              font-size: 16px;
+              line-height: 30px;
+    
+            }
+    
+            @include media('>=phone', '<tablet'){
+              font-size: 18px;
+              line-height: 30px;
+            }
           }
         }
 
@@ -68,6 +113,24 @@
       .hero-art{
         min-width: 600px;
         // align-self: center;
+        @include media('<phone'){
+          display: none;
+
+        }
+
+        @include media('>=phone', '<custom-view-1'){
+          display: none;
+          
+        }
+
+        @include media('>=custom-view-1', '<desktop'){
+          min-width: 500px;
+
+        }
+
+        .spline-watermark{
+          display: none;
+        }
       }
     }
   }
@@ -75,11 +138,19 @@
   main{
     // margin: 2rem 2.5rem;
     
-
-
     .rates-container{
       margin: 3rem 0;
       padding: 2rem 3.5rem;
+
+      @include media('<phone'){
+        padding: 2rem;
+
+      }
+
+      @include media('>=phone', '<tablet'){
+        padding: 2rem 2.5rem;
+
+      }
 
       .rates_title{
         font-style: normal;
@@ -87,11 +158,33 @@
         font-size: 60px;
         line-height: 89px;
         color: #FFFFFF;
+
+        @include media('<phone'){
+          font-size: 36px;
+          line-height: 60px;
+  
+        }
+  
+        @include media('>=phone', '<tablet'){
+          font-size: 42px;
+          line-height: 72px;
+        }
       }
 
       .rates_source{
         font-size: 16px;
         color: #ffffff7a;
+
+        @include media('<phone'){
+          font-size: 14px;
+  
+        }
+  
+        @include media('>=phone', '<tablet'){
+          font-size: 16px;
+
+        }
+
         a{
           color: #ffffff7a;
         }
@@ -115,6 +208,19 @@
       margin: 3rem 0;
       padding: 2rem 3.5rem;
 
+      @include media('<phone'){
+        padding: 2rem 1rem;
+        background-size: 15%, 25%;
+
+      }
+
+      @include media('>=phone', '<tablet'){
+        padding: 2rem;
+        background-size: 15%, 25%;
+
+
+      }
+
       .conversion-form-container{
         .conversion_title{
           font-style: normal;
@@ -122,6 +228,17 @@
           font-size: 60px;
           line-height: 89px;
           color: #FFFFFF;
+
+          @include media('<phone'){
+            font-size: 36px;
+            line-height: 60px;
+    
+          }
+    
+          @include media('>=phone', '<tablet'){
+            font-size: 42px;
+            line-height: 72px;
+          }
         }
 
         .conversion_subtitle{
@@ -130,12 +247,35 @@
           font-size: 20px;
           line-height: 30px;
           color: rgba(255, 255, 255, 0.74);
+
+          @include media('<phone'){
+            font-size: 16px;
+            line-height: 20px;
+    
+          }
+    
+          @include media('>=phone', '<tablet'){
+            font-size: 18px;
+            line-height: 25px;
+          }
         }
 
         .conversion-form{
           display: flex;
           flex-direction: row;
           margin: 3rem 0;
+
+          @include media('<phone'){
+            flex-direction: row;
+            width: fit-content;
+    
+          }
+    
+          @include media('>=phone', '<custom-view'){
+            flex-direction: row;
+            width: fit-content;
+
+          }
 
           input::-webkit-outer-spin-button,
           input::-webkit-inner-spin-button {
@@ -159,6 +299,16 @@
               color: #FFFFFF;
               text-transform: uppercase;
               margin: 0 0.5rem;
+
+              @include media('<phone'){
+                font-size: 20px;
+
+              }
+        
+              @include media('>=phone', '<custom-view'){
+                font-size: 25px;
+
+              }
             }
 
             .eth-input{
@@ -167,6 +317,16 @@
               padding: 1rem;
               color: #FFFFFF;
               font-size: 28px;
+
+              @include media('<phone'){
+                font-size: 18px;
+
+              }
+        
+              @include media('>=phone', '<custom-view'){
+                font-size: 22px;
+
+              }
             }
           }
 
@@ -182,6 +342,18 @@
             cursor: pointer;
             transition: 0.2s;
             margin: 0 1.5rem;
+
+            @include media('<phone'){
+              width: fit-content;
+              margin: 1.5rem 0;
+
+            }
+      
+            @include media('>=phone', '<custom-view'){
+              width: fit-content;
+              margin: 1.5rem 0;
+
+            }
   
             &:hover{
               background: #FFFFFF;
@@ -200,6 +372,18 @@
           font-size: 36px;
           line-height: 53px;
           color: #FFFFFF;
+
+          @include media('<phone'){
+            font-size: 28px;
+            line-height: 42px;
+
+          }
+    
+          @include media('>=phone', '<tablet'){
+            font-size: 32px;
+            line-height: 48px;
+
+          }
         }
 
         .conversion-results{
@@ -216,6 +400,20 @@
             font-size: 32px;
             line-height: 47px;
             color: #FFFFFF;
+
+            @include media('<phone'){
+              font-size: 20px;
+              line-height: 38px;
+              margin: 0.5rem;
+  
+            }
+      
+            @include media('>=phone', '<tablet'){
+              font-size: 26px;
+              line-height: 42px;
+              margin: 0.5rem;
+  
+            }
 
             span{
               margin: 0 0.3rem;
@@ -255,6 +453,18 @@
       font-style: normal;
       font-weight: normal;
 
+      @include media('<phone'){
+        font-size: 16px;
+        line-height: 28px;
+
+      }
+
+      @include media('>=phone', '<tablet'){
+        font-size: 18px;
+        line-height: 30px;
+
+      }
+
       span{
         margin: 0 0.4rem;
       }
@@ -273,6 +483,18 @@
       line-height: 27px;
       text-align: center;
       color: rgba(255, 255, 255, 0.52);
+
+      @include media('<phone'){
+        font-size: 16px;
+        line-height: 28px;
+
+      }
+
+      @include media('>=phone', '<tablet'){
+        font-size: 18px;
+        line-height: 30px;
+
+      }
     }
   }
 }

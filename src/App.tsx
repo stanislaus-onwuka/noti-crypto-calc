@@ -70,7 +70,7 @@ function App() {
         setBtcValue(value.data.p);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -85,7 +85,7 @@ function App() {
         setEthValue(value.data.p);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -98,7 +98,7 @@ function App() {
         setNairaValue(value.data.p);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     // console.log("NGN",value.data.p);
   }
@@ -155,7 +155,7 @@ function App() {
               <h3 className="hero_pretitle">noti's</h3>
               <h1 className="hero_title">Crypto Calc</h1>
               <p className="hero_subtitle">
-                Built for Noti’s founder and Beanies co founder, Femi Johnsn so he can stop disturbing Stanley’s life. 
+                Built for Noti`s founder and Beanies co founder, Femi Johnsn so he can stop disturbing Stanley’s life. 
               </p>
             </div>
             <a href="#conversion" className="hero-btn" >Perform Conversion</a>

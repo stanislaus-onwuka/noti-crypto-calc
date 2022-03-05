@@ -12,7 +12,7 @@ export default function Navigation (){
                 <li className="menu-item"><a href="#rates">Rates</a></li>
                 <li className="menu-item"><a href="#conversion">Convert ETH</a></li>
             </ul>
-            <button className="mobile-btn">Convert ETH</button>
+            <a href="#conversion" className="mobile-btn">Convert ETH</a>
         </nav>
     )
 }

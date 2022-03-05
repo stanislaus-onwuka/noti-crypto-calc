@@ -1,3 +1,5 @@
+@import '../../breakpoints.scss';
+
 .rate{
     display: flex;
     flex-direction: column;
@@ -8,6 +10,15 @@
     max-width: 330px;
     margin: 1rem 1.2rem;
 
+    
+    @include media('<phone'){
+        padding: 1rem;
+    }
+
+    @include media('>=phone', '<tablet'){
+        padding: 1rem 1.5rem;
+    }
+
     .rate-title{
         font-style: normal;
         font-weight: normal;
@@ -15,6 +26,16 @@
         line-height: 62px;
         color: #FFFFFF;
         text-transform: uppercase;
+
+        @include media('<phone'){
+            font-size: 28px;
+            line-height: 42px;
+        }
+    
+        @include media('>=phone', '<tablet'){
+            font-size: 32px;
+            line-height: 52px;
+        }
     }
 
     .exchange-rate{
@@ -28,12 +49,34 @@
             font-weight: normal;
             font-size: 26px;
             line-height: 44px;
-            color: #d6d6d6;
+            color: #f0f0f0;
             text-transform: uppercase;
+
+            @include media('<phone'){
+                font-size: 18px;
+                line-height: 36px;
+            }
+        
+            @include media('>=phone', '<tablet'){
+                font-size: 22px;
+                line-height: 40px;
+            }
         }
 
         .arrow{
             margin: 0 0.4rem;
+
+            @include media('<phone'){
+                svg{
+                    width: 32px;
+                }
+            }
+        
+            @include media('>=phone', '<tablet'){
+                svg{
+                    width: 42px;
+                }
+            }
         }
     }
 }
