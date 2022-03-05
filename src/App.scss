@@ -266,13 +266,13 @@
           margin: 3rem 0;
 
           @include media('<phone'){
-            flex-direction: row;
+            flex-direction: column;
             width: fit-content;
     
           }
     
           @include media('>=phone', '<custom-view'){
-            flex-direction: row;
+            flex-direction: column;
             width: fit-content;
 
           }
