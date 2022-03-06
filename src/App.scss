@@ -477,7 +477,7 @@
       }
 
       @include media('>=phone', '<tablet'){
-        font-size: 18px;
+        font-size: 16px;
         line-height: 30px;
 
       }
@@ -502,13 +502,13 @@
       color: rgba(255, 255, 255, 0.52);
 
       @include media('<phone'){
-        font-size: 16px;
+        font-size: 14px;
         line-height: 28px;
 
       }
 
       @include media('>=phone', '<tablet'){
-        font-size: 18px;
+        font-size: 15px;
         line-height: 30px;
 
       }
