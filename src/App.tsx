@@ -59,11 +59,11 @@ function App() {
   ]
 
   // Connect to WebSockets
+
   // BTC Websocket
   let btcWS = new WebSocket('wss://fstream.binance.com/stream?streams=btcusdt@aggTrade');
   btcWS.onmessage = (e) => {
     const value = JSON.parse(e.data);
-    // console.log("BTC", value.data.p);
     
     try {
       if ((value.event = "data")) {
@@ -140,9 +140,6 @@ function App() {
     setEthInputValue(Math.abs(actualVal))
 
   }
-
-  // Puppeeter
-  // <!-- #__APP > div > div > div.css-1jx6fr9 > div > div.css-i54jlg > div.left > div > div.nowPrice > div.showPrice -->
 
 
   return (
