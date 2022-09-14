@@ -19,7 +19,7 @@ const defaultCalcValues = {
 function App() {
   const [btcValue, setBtcValue] = useState(0);
   const [ethValue, setEthValue] = useState(0);
-  const [nairaValue, setNairaValue] = useState(580);
+  const [nairaValue, setNairaValue] = useState(710);
   const [calcValues, setCalcValues] = useState<CalcValues>(defaultCalcValues);
   const [convertedValues, setConvertedValues] = useState({convertedDollars: 0, convertedNaira: 0, convertedBtc: 0});
   const [ethInputValue, setEthInputValue] = useState(0);
