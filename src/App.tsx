@@ -144,85 +144,87 @@ function App() {
 
   return (
     <div className="homepage" id="home">
-      <header>
-        <Navigation />
-        <div className="hero-container">
-          <div className="hero">
-            <div className='hero-text'>
-              <h3 className="hero_pretitle">noti's</h3>
-              <h1 className="hero_title">Crypto Calc</h1>
-              <p className="hero_subtitle">
-                Built for Noti`s co founder and <a href="https://www.wearebeanies.com/" target="_blank" rel="noreferrer" >Beanies</a> co founder, Femi Johnsn so he can stop disturbing Stanley’s life. 
-              </p>
-            </div>
-            <a href="#conversion" className="hero-btn" >Perform Conversion</a>
-          </div>
-          <div className="hero-art">
-            <iframe src='https://my.spline.design/crypto-6554ab1fac313c113586d95f59c22e3f/' title="Crypto" frameBorder='0' width='100%' height='100%'></iframe>
-          </div>
-        </div>
-      </header>
-      <main>
-        <section className="rates-container" id="rates">
-          <h2 className="rates_title">Exchange Rates</h2>
-          <em className="rates_source">Source: <a href='https://www.binance.com/en-NG/markets' target="_blank" rel="noreferrer">Binance</a></em>
-          <div className="rates">
-            {
-              data.map((rate) => {
-                return <Rate
-                  currency={rate.currency}
-                  fromSymbol={rate.fromSymbol}
-                  fromValue={rate.fromValue}
-                  toSymbol={rate.toSymbol}
-                  toValue={rate.toValue}
-                  bgColor={rate.bgColor}
-                  bgShadow={rate.bgShadow}
-                  key={rate.id}
-                />
-              })
-            }
-          </div>
-        </section>
-        {
-          ethValue > 0 &&
-          <section className="conversion-container" id="conversion">
-          <div className="conversion-form-container">
-            <h2 className="conversion_title">Convert ETH</h2>
-            <p className="conversion_subtitle">Get the your equivalent ETH in Naira, BTC and Dollars.</p>
-            <form className=" conversion-form" onSubmit={handleSubmit}>
-              <div className="eth-input-container">
-                <label htmlFor="eth-input">eth</label>
-                <input type="number" name="eth-input" className="eth-input" onChange={handleChange} required min="0" step=".0001"/>
+      <div className='container'>
+        <header>
+          <Navigation />
+          <div className="hero-container">
+            <div className="hero">
+              <div className='hero-text'>
+                <h3 className="hero_pretitle">noti's</h3>
+                <h1 className="hero_title">Crypto Calc</h1>
+                <p className="hero_subtitle">
+                  Built for Noti`s co founder and <a href="https://www.wearebeanies.com/" target="_blank" rel="noreferrer" >Beanies</a> co founder, Femi Johnsn so he can stop disturbing Stanley’s life. 
+                </p>
               </div>
-              <input type="submit" value="Convert" className="convert-btn"/>
-            </form>
-          </div>
-          <div className="conversion-results-container">
-            <h2 className="conversion-results-container_title">Conversion Results</h2>
-            <div className="conversion-results">
-              <h3 className="conversion-result dollar-result">
-                $ <span>{ Math.ceil(convertedValues.convertedDollars).toLocaleString('en-US') }</span> Dollars
-              </h3>
-              <h3 className="conversion-result dollar-result">
-                ₦ <span>{ Math.ceil(convertedValues.convertedNaira).toLocaleString('en-US') }</span> Naira
-              </h3>
-              <h3 className="conversion-result dollar-result">
-                <span>{ Math.abs(convertedValues.convertedBtc).toPrecision(4) }</span> BTC
-              </h3>
+              <a href="#conversion" className="hero-btn" >Perform Conversion</a>
+            </div>
+            <div className="hero-art">
+              <iframe src='https://my.spline.design/crypto-6554ab1fac313c113586d95f59c22e3f/' title="Crypto" frameBorder='0' width='100%' height='100%'></iframe>
             </div>
           </div>
-        </section>
-        }
-      </main>
-      <footer>
-        <h4 className="made-by">
-          Made with <span className="heart-logo"><HeartIcon/></span> by
-          <span className="gh-link">
-            <a href="https://github.com/stanislaus-onwuka" target='_blank' rel="noreferrer">5T4N5</a>
-          </span>
-        </h4>
-        <p className='copyrights'>©NOTI 2022 All Rights Reserved</p>
-      </footer>
+        </header>
+        <main>
+          <section className="rates-container" id="rates">
+            <h2 className="rates_title">Exchange Rates</h2>
+            <em className="rates_source">Source: <a href='https://www.binance.com/en-NG/markets' target="_blank" rel="noreferrer">Binance</a></em>
+            <div className="rates">
+              {
+                data.map((rate) => {
+                  return <Rate
+                    currency={rate.currency}
+                    fromSymbol={rate.fromSymbol}
+                    fromValue={rate.fromValue}
+                    toSymbol={rate.toSymbol}
+                    toValue={rate.toValue}
+                    bgColor={rate.bgColor}
+                    bgShadow={rate.bgShadow}
+                    key={rate.id}
+                  />
+                })
+              }
+            </div>
+          </section>
+          {
+            ethValue > 0 &&
+            <section className="conversion-container" id="conversion">
+            <div className="conversion-form-container">
+              <h2 className="conversion_title">Convert ETH</h2>
+              <p className="conversion_subtitle">Get the your equivalent ETH in Naira, BTC and Dollars.</p>
+              <form className=" conversion-form" onSubmit={handleSubmit}>
+                <div className="eth-input-container">
+                  <label htmlFor="eth-input">eth</label>
+                  <input type="number" name="eth-input" className="eth-input" onChange={handleChange} required min="0" step=".0001"/>
+                </div>
+                <input type="submit" value="Convert" className="convert-btn"/>
+              </form>
+            </div>
+            <div className="conversion-results-container">
+              <h2 className="conversion-results-container_title">Conversion Results</h2>
+              <div className="conversion-results">
+                <h3 className="conversion-result dollar-result">
+                  $ <span>{ Math.ceil(convertedValues.convertedDollars).toLocaleString('en-US') }</span> Dollars
+                </h3>
+                <h3 className="conversion-result dollar-result">
+                  ₦ <span>{ Math.ceil(convertedValues.convertedNaira).toLocaleString('en-US') }</span> Naira
+                </h3>
+                <h3 className="conversion-result dollar-result">
+                  <span>{ Math.abs(convertedValues.convertedBtc).toPrecision(4) }</span> BTC
+                </h3>
+              </div>
+            </div>
+          </section>
+          }
+        </main>
+        <footer>
+          <h4 className="made-by">
+            Made with <span className="heart-logo"><HeartIcon/></span> by
+            <span className="gh-link">
+              <a href="https://github.com/stanislaus-onwuka" target='_blank' rel="noreferrer">5T4N5</a>
+            </span>
+          </h4>
+          <p className='copyrights'>©NOTI 2022 All Rights Reserved</p>
+        </footer>
+      </div>
     </div>
   );
 }
