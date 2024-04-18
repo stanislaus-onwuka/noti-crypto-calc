@@ -19,7 +19,7 @@ const defaultCalcValues = {
 function App() {
   const [btcValue, setBtcValue] = useState(0);
   const [ethValue, setEthValue] = useState(0);
-  const [nairaValue, setNairaValue] = useState(740);
+  const [nairaValue, setNairaValue] = useState(1240);
   const [calcValues, setCalcValues] = useState<CalcValues>(defaultCalcValues);
   const [convertedValues, setConvertedValues] = useState({convertedDollars: 0, convertedNaira: 0, convertedBtc: 0});
   const [ethInputValue, setEthInputValue] = useState(0);
@@ -61,47 +61,66 @@ function App() {
   // Connect to WebSockets
 
   // BTC Websocket
-  let btcWS = new WebSocket('wss://fstream.binance.com/stream?streams=btcusdt@aggTrade');
-  btcWS.onmessage = (e) => {
-    const value = JSON.parse(e.data);
-    
-    try {
-      if ((value.event = "data")) {
-        setBtcValue(value.data.p);
+  useEffect(()=>{
+    let btcWS = new WebSocket('wss://fstream.binance.com/stream?streams=btcusdt@aggTrade');
+    btcWS.onmessage = (e) => {
+      const value = JSON.parse(e.data);
+      
+      try {
+        if ((value.event = "data")) {
+          setBtcValue(value.data.p);
+        }
+      } catch (err) {
+        // console.log(err);
       }
-    } catch (err) {
-      // console.log(err);
     }
-  }
+
+    return ()=>{
+      btcWS.close()
+    }
+  }, [])
 
   // ETH Websocket
-  let ethWS = new WebSocket('wss://fstream.binance.com/stream?streams=ethusdt@aggTrade');
-  ethWS.onmessage = (e) => {
-    const value = JSON.parse(e.data);
-    // console.log("ETH", value.data.p);
-
-    try {
-      if ((value.event = "data")) {
-        setEthValue(value.data.p);
+  useEffect(()=>{
+    let ethWS = new WebSocket('wss://fstream.binance.com/stream?streams=ethusdt@aggTrade');
+    ethWS.onmessage = (e) => {
+      const value = JSON.parse(e.data);
+      // console.log("ETH", value.data.p);
+  
+      try {
+        if ((value.event = "data")) {
+          setEthValue(value.data.p);
+        }
+      } catch (err) {
+        // console.log(err);
       }
-    } catch (err) {
-      // console.log(err);
     }
-  }
+
+    return ()=>{
+      ethWS.close()
+    }
+  },[])
+
 
   // Naira Websocket
-  let ngnWS = new WebSocket('wss://stream.binance.com:9443/stream?streams=usdtngn@aggTrade');
-  ngnWS.onmessage = (e) => {
-    const value = JSON.parse(e.data);
-    try {
-      if ((value.event = "data")) {
-        setNairaValue(value.data.p);
+  useEffect(()=>{
+    let ngnWS = new WebSocket('wss://stream.binance.com:9443/stream?streams=usdtngn@aggTrade');
+    ngnWS.onmessage = (e) => {
+      const value = JSON.parse(e.data);
+      try {
+        if ((value.event = "data")) {
+          setNairaValue(value.data.p);
+        }
+      } catch (err) {
+        // console.log(err);
       }
-    } catch (err) {
-      // console.log(err);
+      // console.log("NGN",value.data.p);
     }
-    // console.log("NGN",value.data.p);
-  }
+
+    return () =>{
+      ngnWS.close()
+    }
+  }, [])
 
   // Perform conversion
   useEffect(() => {
@@ -111,12 +130,16 @@ function App() {
       nairaCalcValue: nairaValue
     })
 
-    setInterval(
+    const calcInterval =  setInterval(
       () => setCalcValues({
         ethCalcValue: ethValue,
         btcCalcValue: btcValue,
         nairaCalcValue: nairaValue
       }), 150000)
+
+    return () =>{
+      clearInterval(calcInterval)
+    }
   }, [ethValue, btcValue, nairaValue])
 
   // Submit function
@@ -222,7 +245,7 @@ function App() {
               <a href="https://github.com/stanislaus-onwuka" target='_blank' rel="noreferrer">5T4N5</a>
             </span>
           </h4>
-          <p className='copyrights'>©NOTI 2022 All Rights Reserved</p>
+          <p className='copyrights'>©NOTI 2024 All Rights Reserved</p>
         </footer>
       </div>
     </div>

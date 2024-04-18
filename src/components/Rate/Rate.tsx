@@ -29,6 +29,11 @@ export default function Rate({currency,fromSymbol,fromValue,toSymbol,toValue,bgC
                     currency === 'naira' ? <p className="to-value">{`${toSymbol}${toValue}`}</p> : <p className="to-value">{`${toValue}${toSymbol}`}</p>
                 }
             </div>
+            <div>
+                {
+                    currency === 'naira' ? <i>Unavailabe</i> : null
+                }
+            </div>
         </div>
     )
 }
